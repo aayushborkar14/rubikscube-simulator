@@ -16,6 +16,9 @@ int frontSide{2};
 int rightSide{3};
 int backSide{4};
 int downSide{5};
+int numberx{};
+int numbery{};
+int numberz{};
 
 void clockwise(char arr[6][3][3], int side) {
     cube[side][0][0] = arr[side][2][0];
@@ -29,6 +32,7 @@ void clockwise(char arr[6][3][3], int side) {
 }
 
 void printCube() {
+    cout << "\n";
     for (int j=0; j<3; j++) {
         for (int k=0; k<3; k++) {
             if (k == 0) {
@@ -46,12 +50,12 @@ void printCube() {
     cout << cube[leftSide][1][0] << " " << cube[leftSide][1][1] << " " << cube[leftSide][1][2] << " ";
     cout << cube[frontSide][1][0] << " " << cube[frontSide][1][1] << " " << cube[frontSide][1][2] << " ";
     cout << cube[rightSide][1][0] << " " << cube[rightSide][1][1] << " " << cube[rightSide][1][2] << " ";
-    cout << cube[leftSide][1][0] << " " << cube[leftSide][1][1] << " " << cube[leftSide][1][2] << " ";
+    cout << cube[backSide][1][0] << " " << cube[backSide][1][1] << " " << cube[backSide][1][2] << " ";
     cout << "\n";
-    cout << cube[leftSide][2][0] << " " << cube[leftSide][2][leftSide] << " " << cube[1][2][2] << " ";
+    cout << cube[leftSide][2][0] << " " << cube[leftSide][2][leftSide] << " " << cube[leftSide][2][2] << " ";
     cout << cube[frontSide][2][0] << " " << cube[frontSide][2][1] << " " << cube[frontSide][2][2] << " ";
     cout << cube[rightSide][2][0] << " " << cube[rightSide][2][1] << " " << cube[rightSide][2][2] << " ";
-    cout << cube[leftSide][2][0] << " " << cube[leftSide][2][1] << " " << cube[leftSide][2][2] << " ";
+    cout << cube[backSide][2][0] << " " << cube[backSide][2][1] << " " << cube[backSide][2][2] << " ";
     cout << "\n";
     for (int j=0; j<3; j++) {
         for (int k=0; k<3; k++) {
@@ -172,6 +176,81 @@ void b() {
     clockwise(temp, backSide);
 }
 
+void x() {
+    numberx++;
+    if ((numberx%4) == 0) {
+        upSide = 2;
+        frontSide = 5;
+        downSide = 4;
+        backSide = 0;
+    } else if ((numberx%4) == 1) {
+        upSide = 5;
+        frontSide = 4;
+        downSide = 0;
+        backSide = 2;
+    } else if ((numberx%4) == 2) {
+        upSide = 4;
+        frontSide = 0;
+        downSide = 2;
+        backSide = 5;
+    } else if ((numberx%4) == 3) {
+        upSide = 0;
+        frontSide = 2;
+        downSide = 5;
+        backSide = 4;
+    }
+}
+
+void y() {
+    numbery++;
+    if ((numbery%4) == 0) {
+        leftSide = 2;
+        frontSide = 3;
+        rightSide = 4;
+        backSide = 1;
+    } else if ((numbery%4) == 1) {
+        leftSide = 3;
+        frontSide = 4;
+        rightSide = 1;
+        backSide = 2;
+    } else if ((numbery%4) == 2) {
+        leftSide = 4;
+        frontSide = 1;
+        rightSide = 2;
+        backSide = 3;
+    } else if ((numbery%4) == 3) {
+        leftSide = 1;
+        frontSide = 2;
+        rightSide = 3;
+        backSide = 4;
+    }
+}
+
+void z() {
+    numberz++;
+    if ((numberz%4) == 0) {
+        upSide = 1;
+        leftSide = 5;
+        downSide = 3;
+        rightSide = 0;
+    } else if ((numberz%4) == 1) {
+        upSide = 5;
+        leftSide = 3;
+        downSide = 0;
+        rightSide = 1;
+    } else if ((numberz%4) == 2) {
+        upSide = 3;
+        leftSide = 0;
+        downSide = 1;
+        rightSide = 5;
+    } else if ((numberz%4) == 3) {
+        upSide = 0;
+        leftSide = 1;
+        downSide = 5;
+        rightSide = 3;
+    }
+}
+
 int main() {
     char choice{};
     cout << "Rubiks' cube Simulator" << "\n";
@@ -185,7 +264,13 @@ int main() {
         cout << "D" << "\n";
         cout << "F" << "\n";
         cout << "B" << "\n";
-        cout << "E. Exit" << "\n";
+        cout << "M" << "\n";
+        cout << "E" << "\n";
+        cout << "S" << "\n";
+        cout << "X" << "\n";
+        cout << "Y" << "\n";
+        cout << "Z" << "\n";
+        cout << "Q. Quit" << "\n";
         cout << "Enter your choice: ";
         cin >> choice;
         switch(choice) {
@@ -219,17 +304,32 @@ int main() {
                 b();
                 break;
             }
-            case 'e':
-            case 'E': {
+            case 'q':
+            case 'Q': {
                 cout << "Goodbye!";
+                break;
+            }
+            case 'x':
+            case 'X': {
+                x();
+                break;
+            }
+            case 'y':
+            case 'Y': {
+                y();
+                break;
+            }
+            case 'z':
+            case 'Z': {
+                z();
                 break;
             }
             default:
                 cout << "Wrong Choice Entered" << "\n";
         }
-        if (choice!='e' && choice!='E') {
+        if (choice!='q' && choice!='Q') {
             printCube();
         }
-    } while (choice!='e' && choice!='E');
+    } while (choice!='q' && choice!='Q');
     return 0;
 }
