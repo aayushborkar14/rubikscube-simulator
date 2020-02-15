@@ -177,78 +177,27 @@ void b() {
 }
 
 void x() {
-    numberx++;
-    if ((numberx%4) == 0) {
-        upSide = 2;
-        frontSide = 5;
-        downSide = 4;
-        backSide = 0;
-    } else if ((numberx%4) == 1) {
-        upSide = 5;
-        frontSide = 4;
-        downSide = 0;
-        backSide = 2;
-    } else if ((numberx%4) == 2) {
-        upSide = 4;
-        frontSide = 0;
-        downSide = 2;
-        backSide = 5;
-    } else if ((numberx%4) == 3) {
-        upSide = 0;
-        frontSide = 2;
-        downSide = 5;
-        backSide = 4;
-    }
+    int temp = upSide;
+    upSide = frontSide;
+    frontSide = downSide;
+    downSide = backSide;
+    backSide = temp;
 }
 
 void y() {
-    numbery++;
-    if ((numbery%4) == 0) {
-        leftSide = 2;
-        frontSide = 3;
-        rightSide = 4;
-        backSide = 1;
-    } else if ((numbery%4) == 1) {
-        leftSide = 3;
-        frontSide = 4;
-        rightSide = 1;
-        backSide = 2;
-    } else if ((numbery%4) == 2) {
-        leftSide = 4;
-        frontSide = 1;
-        rightSide = 2;
-        backSide = 3;
-    } else if ((numbery%4) == 3) {
-        leftSide = 1;
-        frontSide = 2;
-        rightSide = 3;
-        backSide = 4;
-    }
+    int temp = leftSide;
+    leftSide = frontSide;
+    frontSide = rightSide;
+    rightSide = backSide;
+    backSide = temp;
 }
 
 void z() {
-    numberz++;
-    if ((numberz%4) == 0) {
-        upSide = 1;
-        leftSide = 5;
-        downSide = 3;
-        rightSide = 0;
-    } else if ((numberz%4) == 1) {
-        upSide = 5;
-        leftSide = 3;
-        downSide = 0;
-        rightSide = 1;
-    } else if ((numberz%4) == 2) {
-        upSide = 3;
-        leftSide = 0;
-        downSide = 1;
-        rightSide = 5;
-    } else if ((numberz%4) == 3) {
-        upSide = 0;
-        leftSide = 1;
-        downSide = 5;
-        rightSide = 3;
-    }
+    int temp = leftSide;
+    leftSide = frontSide;
+    frontSide = rightSide;
+    rightSide = backSide;
+    backSide = temp;
 }
 
 int main() {
