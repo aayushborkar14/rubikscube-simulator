@@ -10,15 +10,36 @@ char cube[6][3][3] = {
         {{'B', 'B', 'B'}, {'B', 'B', 'B'}, {'B', 'B', 'B'}},
         {{'Y', 'Y', 'Y'}, {'Y', 'Y', 'Y'}, {'Y', 'Y', 'Y'}}
 };
+char cubeCopy[6][3][3] = {
+        {{'W', 'W', 'W'}, {'W', 'W', 'W'}, {'W', 'W', 'W'}},
+        {{'O', 'O', 'O'}, {'O', 'O', 'O'}, {'O', 'O', 'O'}},
+        {{'G', 'G', 'G'}, {'G', 'G', 'G'}, {'G', 'G', 'G'}},
+        {{'R', 'R', 'R'}, {'R', 'R', 'R'}, {'R', 'R', 'R'}},
+        {{'B', 'B', 'B'}, {'B', 'B', 'B'}, {'B', 'B', 'B'}},
+        {{'Y', 'Y', 'Y'}, {'Y', 'Y', 'Y'}, {'Y', 'Y', 'Y'}}
+};
 int upSide{0};
 int leftSide{1};
 int frontSide{2};
 int rightSide{3};
 int backSide{4};
 int downSide{5};
-int numberx{};
-int numbery{};
-int numberz{};
+
+void reset() {
+    for (int i=0; i<6; i++) {
+        for (int j=0; j<3; j++) {
+            for (int k=0; k<3; k++) {
+                cube[i][j][k] = cubeCopy[i][j][k];
+            }
+        }
+    }
+    upSide = 0;
+    leftSide = 1;
+    frontSide = 2;
+    rightSide = 3;
+    backSide = 4;
+    downSide = 5;
+}
 
 void clockwise(char arr[6][3][3], int side) {
     cube[side][0][0] = arr[side][2][0];
@@ -149,12 +170,18 @@ void f() {
             }
         }
     }
-    for (int k=0; k<3; k++) {
-        cube[upSide][2][k] = temp[leftSide][2][k];
-        cube[leftSide][2][k] = temp[downSide][2][k];
-        cube[downSide][2][k] = temp[rightSide][2][k];
-        cube[rightSide][2][k] = temp[upSide][2][k];
-    }
+    cube[upSide][2][0] = temp[leftSide][2][2];
+    cube[upSide][2][1] = temp[leftSide][1][2];
+    cube[upSide][2][2] = temp[leftSide][0][2];
+    cube[leftSide][2][2] = temp[downSide][0][2];
+    cube[leftSide][1][2] = temp[downSide][0][1];
+    cube[leftSide][0][2] = temp[downSide][0][0];
+    cube[downSide][0][2] = temp[rightSide][0][0];
+    cube[downSide][0][1] = temp[rightSide][1][0];
+    cube[downSide][0][0] = temp[rightSide][2][0];
+    cube[rightSide][0][0] = temp[upSide][2][0];
+    cube[rightSide][1][0] = temp[upSide][2][1];
+    cube[rightSide][2][0] = temp[upSide][2][2];
     clockwise(temp, frontSide);
 }
 
@@ -167,12 +194,18 @@ void b() {
             }
         }
     }
-    for (int k=0; k<3; k++) {
-        cube[upSide][0][k] = temp[rightSide][0][k];
-        cube[rightSide][0][k] = temp[downSide][0][k];
-        cube[downSide][0][k] = temp[leftSide][0][k];
-        cube[leftSide][0][k] = temp[upSide][0][k];
-    }
+    cube[upSide][0][0] = temp[rightSide][0][2];
+    cube[upSide][0][1] = temp[rightSide][1][2];
+    cube[upSide][0][2] = temp[rightSide][2][2];
+    cube[rightSide][0][2] = temp[downSide][2][2];
+    cube[rightSide][1][2] = temp[downSide][2][1];
+    cube[rightSide][2][2] = temp[downSide][2][0];
+    cube[downSide][2][2] = temp[leftSide][2][0];
+    cube[downSide][2][1] = temp[leftSide][1][0];
+    cube[downSide][2][0] = temp[leftSide][0][0];
+    cube[leftSide][2][0] = temp[upSide][0][0];
+    cube[leftSide][1][0] = temp[upSide][0][1];
+    cube[leftSide][0][0] = temp[upSide][0][2];
     clockwise(temp, backSide);
 }
 
@@ -270,6 +303,7 @@ int main() {
         cout << "X" << "\n";
         cout << "Y" << "\n";
         cout << "Z" << "\n";
+        cout << "C. Clear the cube and go back to original position" << "\n";
         cout << "Q. Quit" << "\n";
         cout << "Enter your choice: ";
         cin >> choice;
@@ -339,6 +373,11 @@ int main() {
                 z();
                 break;
             }
+            case 'c':
+            case 'C': {
+                reset();
+                break;
+            }    
             default:
                 cout << "Wrong Choice Entered" << "\n";
         }
