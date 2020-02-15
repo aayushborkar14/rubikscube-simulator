@@ -176,6 +176,57 @@ void b() {
     clockwise(temp, backSide);
 }
 
+void m() {
+    char temp[6][3][3];
+    for (int i=0; i<6; i++) {
+        for (int j=0; j<3; j++) {
+            for (int k=0; k<3; k++) {
+                temp[i][j][k] = cube[i][j][k];
+            }
+        }
+    }
+    for (int j=0; j<3; j++) {
+        cube[upSide][j][1] = temp[backSide][j][1];
+        cube[frontSide][j][1] = temp[upSide][j][1];
+        cube[downSide][j][1] = temp[frontSide][j][1];
+        cube[backSide][j][1] = temp[downSide][j][1];
+    }
+}
+
+void e() {
+    char temp[6][3][3];
+    for (int i=0; i<6; i++) {
+        for (int j=0; j<3; j++) {
+            for (int k=0; k<3; k++) {
+                temp[i][j][k] = cube[i][j][k];
+            }
+        }
+    }
+    for (int k=0; k<3; k++) {
+        cube[frontSide][1][k] = temp[leftSide][1][k];
+        cube[leftSide][1][k] = temp[backSide][1][k];
+        cube[backSide][1][k] = temp[rightSide][1][k];
+        cube[rightSide][1][k] = temp[frontSide][1][k];
+    }
+}
+
+void s() {
+    char temp[6][3][3];
+    for (int i=0; i<6; i++) {
+        for (int j=0; j<3; j++) {
+            for (int k=0; k<3; k++) {
+                temp[i][j][k] = cube[i][j][k];
+            }
+        }
+    }
+    for (int k=0; k<3; k++) {
+        cube[upSide][1][k] = temp[leftSide][1][k];
+        cube[leftSide][1][k] = temp[downSide][1][k];
+        cube[downSide][1][k] = temp[rightSide][1][k];
+        cube[rightSide][1][k] = temp[upSide][1][k];
+    }
+}
+
 void x() {
     int temp = upSide;
     upSide = frontSide;
@@ -251,6 +302,21 @@ int main() {
             case 'b':
             case 'B': {
                 b();
+                break;
+            }
+            case 'm':
+            case 'M': {
+                m();
+                break;
+            }
+            case 'e':
+            case 'E': {
+                e();
+                break;
+            }
+            case 's':
+            case 'S': {
+                s();
                 break;
             }
             case 'q':
