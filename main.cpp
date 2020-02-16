@@ -57,31 +57,33 @@ void printCube() {
     for (int j=0; j<3; j++) {
         for (int k=0; k<3; k++) {
             if (k == 0) {
-                cout << "      ";
+                cout << "        ";
             }
             cout << cube[upSide][j][k] << " ";
         }
         cout << "\n";
     }
-    cout << cube[leftSide][0][0] << " " << cube[leftSide][0][1] << " " << cube[leftSide][0][2] << " ";
-    cout << cube[frontSide][0][0] << " " << cube[frontSide][0][1] << " " << cube[frontSide][0][2] << " ";
-    cout << cube[rightSide][0][0] << " " << cube[rightSide][0][1] << " " << cube[rightSide][0][2] << " ";
-    cout << cube[backSide][0][0] << " " << cube[backSide][0][1] << " " << cube[backSide][0][2] << " ";
     cout << "\n";
-    cout << cube[leftSide][1][0] << " " << cube[leftSide][1][1] << " " << cube[leftSide][1][2] << " ";
-    cout << cube[frontSide][1][0] << " " << cube[frontSide][1][1] << " " << cube[frontSide][1][2] << " ";
-    cout << cube[rightSide][1][0] << " " << cube[rightSide][1][1] << " " << cube[rightSide][1][2] << " ";
-    cout << cube[backSide][1][0] << " " << cube[backSide][1][1] << " " << cube[backSide][1][2] << " ";
+    cout << cube[leftSide][0][0] << " " << cube[leftSide][0][1] << " " << cube[leftSide][0][2] << "   ";
+    cout << cube[frontSide][0][0] << " " << cube[frontSide][0][1] << " " << cube[frontSide][0][2] << "   ";
+    cout << cube[rightSide][0][0] << " " << cube[rightSide][0][1] << " " << cube[rightSide][0][2] << "   ";
+    cout << cube[backSide][0][0] << " " << cube[backSide][0][1] << " " << cube[backSide][0][2] << "   ";
     cout << "\n";
-    cout << cube[leftSide][2][0] << " " << cube[leftSide][2][leftSide] << " " << cube[leftSide][2][2] << " ";
-    cout << cube[frontSide][2][0] << " " << cube[frontSide][2][1] << " " << cube[frontSide][2][2] << " ";
-    cout << cube[rightSide][2][0] << " " << cube[rightSide][2][1] << " " << cube[rightSide][2][2] << " ";
-    cout << cube[backSide][2][0] << " " << cube[backSide][2][1] << " " << cube[backSide][2][2] << " ";
+    cout << cube[leftSide][1][0] << " " << cube[leftSide][1][1] << " " << cube[leftSide][1][2] << "   ";
+    cout << cube[frontSide][1][0] << " " << cube[frontSide][1][1] << " " << cube[frontSide][1][2] << "   ";
+    cout << cube[rightSide][1][0] << " " << cube[rightSide][1][1] << " " << cube[rightSide][1][2] << "   ";
+    cout << cube[backSide][1][0] << " " << cube[backSide][1][1] << " " << cube[backSide][1][2] << "   ";
+    cout << "\n";
+    cout << cube[leftSide][2][0] << " " << cube[leftSide][2][leftSide] << " " << cube[leftSide][2][2] << "   ";
+    cout << cube[frontSide][2][0] << " " << cube[frontSide][2][1] << " " << cube[frontSide][2][2] << "   ";
+    cout << cube[rightSide][2][0] << " " << cube[rightSide][2][1] << " " << cube[rightSide][2][2] << "   ";
+    cout << cube[backSide][2][0] << " " << cube[backSide][2][1] << " " << cube[backSide][2][2] << "   ";
+    cout << "\n";
     cout << "\n";
     for (int j=0; j<3; j++) {
         for (int k=0; k<3; k++) {
             if (k == 0) {
-                cout << "      ";
+                cout << "        ";
             }
             cout << cube[5][j][k] << " ";
         }
@@ -101,9 +103,13 @@ void r() {
     for (int j=0; j<3; j++) {
         cube[upSide][j][2] = temp[frontSide][j][2];
         cube[frontSide][j][2] = temp[downSide][j][2];
-        cube[downSide][j][2] = temp[backSide][j][2];
-        cube[backSide][j][2] = temp[upSide][j][2];
     }
+    cube[downSide][0][2] = temp[backSide][2][0];
+    cube[downSide][1][2] = temp[backSide][1][0];
+    cube[downSide][2][2] = temp[backSide][0][0];
+    cube[backSide][2][0] = temp[upSide][0][2];
+    cube[backSide][1][0] = temp[upSide][1][2];
+    cube[backSide][0][0] = temp[upSide][2][2];
     clockwise(temp, rightSide);
 }
 
@@ -117,11 +123,15 @@ void l() {
         }
     }
     for (int j=0; j<3; j++) {
-        cube[upSide][j][0] = temp[backSide][j][0];
-        cube[backSide][j][0] = temp[downSide][j][0];
         cube[frontSide][j][0] = temp[upSide][j][0];
         cube[downSide][j][0] = temp[frontSide][j][0];
     }
+    cube[upSide][0][0] = temp[backSide][2][2];
+    cube[upSide][1][0] = temp[backSide][1][2];
+    cube[upSide][2][0] = temp[backSide][0][2];
+    cube[backSide][2][2] = temp[downSide][0][0];
+    cube[backSide][1][2] = temp[downSide][1][0];
+    cube[backSide][0][2] = temp[downSide][2][0];
     clockwise(temp, leftSide);
 }
 
@@ -377,7 +387,7 @@ int main() {
             case 'C': {
                 reset();
                 break;
-            }    
+            }
             default:
                 cout << "Wrong Choice Entered" << "\n";
         }
