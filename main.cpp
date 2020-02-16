@@ -292,11 +292,6 @@ void s() {
 }
 
 void x() {
-    int temp1 = upSide;
-    upSide = frontSide;
-    frontSide = downSide;
-    downSide = backSide;
-    backSide = temp1;
     char temp[6][3][3];
     for (int i=0; i<6; i++) {
         for (int j=0; j<3; j++) {
@@ -311,6 +306,12 @@ void x() {
         cube[backSide][0][x] = temp[upSide][2][y];
         cube[backSide][1][x] = temp[upSide][1][y];
         cube[backSide][2][x] = temp[upSide][0][y];
+        cube[upSide][0][x] = temp[frontSide][0][x];
+        cube[upSide][1][x] = temp[frontSide][1][x];
+        cube[upSide][2][x] = temp[frontSide][2][x];
+        cube[frontSide][0][x] = temp[downSide][0][x];
+        cube[frontSide][1][x] = temp[downSide][1][x];
+        cube[frontSide][2][x] = temp[downSide][2][x];
         cube[downSide][0][x] = temp[backSide][2][y];
         cube[downSide][1][x] = temp[backSide][1][y];
         cube[downSide][2][x] = temp[backSide][0][y];
@@ -318,11 +319,6 @@ void x() {
 }
 
 void y() {
-    int temp1 = leftSide;
-    leftSide = frontSide;
-    frontSide = rightSide;
-    rightSide = backSide;
-    backSide = temp1;
     char temp[6][3][3];
     for (int i=0; i<6; i++) {
         for (int j=0; j<3; j++) {
@@ -333,14 +329,17 @@ void y() {
     }
     clockwise(temp, upSide);
     anticlockwise(temp, downSide);
+    for (int x=0; x<3; x++) {
+        for (int y=0; y<3; y++) {
+            cube[frontSide][x][y] = temp[rightSide][x][y];
+            cube[rightSide][x][y] = temp[backSide][x][y];
+            cube[backSide][x][y] = temp[leftSide][x][y];
+            cube[leftSide][x][y] = temp[frontSide][x][y];
+        }
+    }
 }
 
 void z() {
-    int temp1 = leftSide;
-    leftSide = frontSide;
-    frontSide = rightSide;
-    rightSide = backSide;
-    backSide = temp1;
     char temp[6][3][3];
     for (int i=0; i<6; i++) {
         for (int j=0; j<3; j++) {
