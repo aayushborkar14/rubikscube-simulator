@@ -277,9 +277,9 @@ void s() {
             }
         }
     }
-    cube[upSide][1][0] = temp[leftSide][0][1];
+    cube[upSide][1][0] = temp[leftSide][2][1];
     cube[upSide][1][1] = temp[leftSide][1][1];
-    cube[upSide][1][2] = temp[leftSide][2][1];
+    cube[upSide][1][2] = temp[leftSide][0][1];
     cube[leftSide][0][1] = temp[downSide][1][0];
     cube[leftSide][1][1] = temp[downSide][1][1];
     cube[leftSide][2][1] = temp[downSide][1][2];
