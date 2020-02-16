@@ -229,11 +229,15 @@ void m() {
         }
     }
     for (int j=0; j<3; j++) {
-        cube[upSide][j][1] = temp[backSide][j][1];
         cube[frontSide][j][1] = temp[upSide][j][1];
         cube[downSide][j][1] = temp[frontSide][j][1];
-        cube[backSide][j][1] = temp[downSide][j][1];
     }
+    cube[upSide][0][1] = temp[backSide][2][1];
+    cube[upSide][1][1] = temp[backSide][1][1];
+    cube[upSide][2][1] = temp[backSide][0][1];
+    cube[backSide][2][1] = temp[downSide][0][1];
+    cube[backSide][1][1] = temp[downSide][1][1];
+    cube[backSide][0][1] = temp[downSide][2][1];
 }
 
 void e() {
@@ -262,12 +266,18 @@ void s() {
             }
         }
     }
-    for (int k=0; k<3; k++) {
-        cube[upSide][1][k] = temp[leftSide][1][k];
-        cube[leftSide][1][k] = temp[downSide][1][k];
-        cube[downSide][1][k] = temp[rightSide][1][k];
-        cube[rightSide][1][k] = temp[upSide][1][k];
-    }
+    cube[upSide][1][0] = temp[leftSide][0][1];
+    cube[upSide][1][1] = temp[leftSide][1][1];
+    cube[upSide][1][2] = temp[leftSide][2][1];
+    cube[leftSide][0][1] = temp[downSide][1][0];
+    cube[leftSide][1][1] = temp[downSide][1][1];
+    cube[leftSide][2][1] = temp[downSide][1][2];
+    cube[downSide][1][0] = temp[rightSide][2][1];
+    cube[downSide][1][1] = temp[rightSide][1][1];
+    cube[downSide][1][2] = temp[rightSide][0][1];
+    cube[rightSide][0][1] = temp[upSide][1][0];
+    cube[rightSide][1][1] = temp[upSide][1][1];
+    cube[rightSide][2][1] = temp[upSide][1][2];
 }
 
 void x() {
@@ -300,7 +310,7 @@ int main() {
     printCube();
     do {
         cout << "\n";
-        cout << "Choice List: " << "\n";
+        /*cout << "Choice List: " << "\n";
         cout << "R" << "\n";
         cout << "L" << "\n";
         cout << "U" << "\n";
@@ -314,7 +324,7 @@ int main() {
         cout << "Y" << "\n";
         cout << "Z" << "\n";
         cout << "C. Clear the cube and go back to original position" << "\n";
-        cout << "Q. Quit" << "\n";
+        cout << "Q. Quit" << "\n";*/
         cout << "Enter your choice: ";
         cin >> choice;
         switch(choice) {
