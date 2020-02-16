@@ -52,6 +52,17 @@ void clockwise(char arr[6][3][3], int side) {
     cube[side][1][0] = arr[side][2][1];
 }
 
+void anticlockwise(char arr[6][3][3], int side) {
+    cube[side][0][0] = arr[side][0][2];
+    cube[side][0][1] = arr[side][1][2];
+    cube[side][0][2] = arr[side][2][2];
+    cube[side][1][2] = arr[side][2][1];
+    cube[side][2][2] = arr[side][2][0];
+    cube[side][2][1] = arr[side][1][0];
+    cube[side][2][0] = arr[side][0][0];
+    cube[side][1][0] = arr[side][0][1];
+}
+
 void printCube() {
     cout << "\n";
     for (int j=0; j<3; j++) {
@@ -281,32 +292,84 @@ void s() {
 }
 
 void x() {
-    int temp = upSide;
+    int temp1 = upSide;
     upSide = frontSide;
     frontSide = downSide;
     downSide = backSide;
-    backSide = temp;
+    backSide = temp1;
+    char temp[6][3][3];
+    for (int i=0; i<6; i++) {
+        for (int j=0; j<3; j++) {
+            for (int k=0; k<3; k++) {
+                temp[i][j][k] = cube[i][j][k];
+            }
+        }
+    }
+    clockwise(temp, rightSide);
+    anticlockwise(temp, leftSide);
+    for (int x=0, y=2; x<3 && y>=0; x++, y--) {
+        cube[backSide][0][x] = temp[upSide][2][y];
+        cube[backSide][1][x] = temp[upSide][1][y];
+        cube[backSide][2][x] = temp[upSide][0][y];
+        cube[downSide][0][x] = temp[backSide][2][y];
+        cube[downSide][1][x] = temp[backSide][1][y];
+        cube[downSide][2][x] = temp[backSide][0][y];
+    }
 }
 
 void y() {
-    int temp = leftSide;
+    int temp1 = leftSide;
     leftSide = frontSide;
     frontSide = rightSide;
     rightSide = backSide;
-    backSide = temp;
+    backSide = temp1;
+    char temp[6][3][3];
+    for (int i=0; i<6; i++) {
+        for (int j=0; j<3; j++) {
+            for (int k=0; k<3; k++) {
+                temp[i][j][k] = cube[i][j][k];
+            }
+        }
+    }
+    clockwise(temp, upSide);
+    anticlockwise(temp, downSide);
 }
 
 void z() {
-    int temp = leftSide;
+    int temp1 = leftSide;
     leftSide = frontSide;
     frontSide = rightSide;
     rightSide = backSide;
-    backSide = temp;
+    backSide = temp1;
+    char temp[6][3][3];
+    for (int i=0; i<6; i++) {
+        for (int j=0; j<3; j++) {
+            for (int k=0; k<3; k++) {
+                temp[i][j][k] = cube[i][j][k];
+            }
+        }
+    }
+    clockwise(temp, frontSide);
+    anticlockwise(temp, backSide);
+    for (int x=0, y=2; x<3 && y>=0; x++, y--) {
+        cube[upSide][0][x] = temp[leftSide][y][0];
+        cube[upSide][1][x] = temp[leftSide][y][1];
+        cube[upSide][2][x] = temp[leftSide][y][2];
+        cube[leftSide][0][x] = temp[downSide][y][0];
+        cube[leftSide][1][x] = temp[downSide][y][1];
+        cube[leftSide][2][x] = temp[downSide][y][2];
+        cube[downSide][0][x] = temp[rightSide][y][0];
+        cube[downSide][1][x] = temp[rightSide][y][1];
+        cube[downSide][2][x] = temp[rightSide][y][2];
+        cube[rightSide][0][x] = temp[upSide][y][0];
+        cube[rightSide][1][x] = temp[upSide][y][1];
+        cube[rightSide][2][x] = temp[upSide][y][2];
+    }
 }
 
 int main() {
     char choice{};
-    cout << "Rubiks' cube Simulator" << "\n";
+    cout << "Rubik's cube Simulator" << "\n";
     printCube();
     do {
         cout << "\n";
