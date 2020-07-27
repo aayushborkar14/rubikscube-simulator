@@ -1,3 +1,2 @@
-# Rubik's Cube CLI
-A Rubik's Cube Simulator for CLI Interface written in C++  
-More Features to be added soon...
+# Rubik's Cube Simulator
+A simple, minimal Rubik's Cube Simulator written in C++
